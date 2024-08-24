@@ -1,0 +1,67 @@
+commonLabel: flask-api
+
+namespace:
+  name: dev
+
+extraLabels:
+  environment: dev
+  team: backend
+
+deployment:
+  name: flask-api-deployment
+  replicas: 2
+  container:
+    name: python-flask-app
+    port: 4000
+    image: panchanandevops/python-flask-app:v1.0.0
+    resources:
+      limits:
+        memory: "512Mi"
+        cpu: "500m"
+      requests:
+        memory: "256Mi"
+        cpu: "250m"
+
+apiService:
+  name: flask-api-service
+  type: ClusterIP
+  port: 4000
+
+ingress:
+  enabled: true
+  name: flask-api-ingress
+  className: nginx
+  host: panchanandevops.com
+
+secret:
+  name: my-secret
+  stringData:
+    DATABASE_URL: postgresql://postgres:postgres@postgres-statefulset-0.postgres-service.dev.svc.cluster.local:5432/postgres
+    POSTGRES_DB: postgres
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+
+statefulset:
+  name: postgres-statefulset
+  applabel: postgres
+  replicas: 1
+  container:
+    name: postgres
+    port: 5432
+    image: postgres:13
+  volumes:
+    name: postgres-storage
+
+dbService:
+  name: postgres-service
+  port: 5432
+
+pv:
+  name: psql-pv-flask
+  storage: 1Gi
+  local:
+    path: /storage/db/flask
+
+pvc:
+  name: psql-pvc-flask
+  storage: 1Gi
