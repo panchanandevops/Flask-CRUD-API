@@ -8,11 +8,11 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/panchanandevops/Todo-React-Spring-App.git
+    repoURL: https://github.com/panchanandevops/Flask-CRUD-API.git
     targetRevision: main
-    path: Deploy/todo-helm-chart/ # Path within the Git repository containing application manifests
+    path: Deploy/flask-helm-chart/ # Path within the Git repository containing application manifests
     helm:
-      releaseName: spring-api
+      releaseName: flask-api
   destination:
     server: https://kubernetes.default.svc # Kubernetes cluster API server address
     namespace: dev
