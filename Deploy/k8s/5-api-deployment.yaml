@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: flask-api
-          image: panchanandevops/python-flask-app:v1.0.0
+          image: panchanandevops/python-flask-app:2.0.1
           resources:
             limits:
               memory: "512Mi"
