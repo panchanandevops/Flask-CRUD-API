@@ -1,9 +1,7 @@
 # Next-flask-crud-app
 
-docker pull k8s.gcr.io/ingress-nginx/controller:v1.10.1
-minikube image load k8s.gcr.io/ingress-nginx/controller:v1.10.1
 
-Sure! Here are the curl commands for each operation.
+Here are the curl commands for each operation.
 
 ### 1. Get All Users
 
