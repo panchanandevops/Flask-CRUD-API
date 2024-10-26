@@ -31,7 +31,7 @@ ingress:
   enabled: true
   name: flask-api-ingress
   className: nginx
-  host: panchanandevops.com
+  host: flask-api.com
 
 secret:
   name: my-secret
@@ -59,8 +59,9 @@ dbService:
 pv:
   name: psql-pv-flask
   storage: 1Gi
-  local:
+  hostPath:
     path: /storage/db/flask
+    type: DirectoryOrCreate
 
 pvc:
   name: psql-pvc-flask
