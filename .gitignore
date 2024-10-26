@@ -1,1 +1,2 @@
 trivy-results.sarif
+.cache/trivy/db/trivy.db

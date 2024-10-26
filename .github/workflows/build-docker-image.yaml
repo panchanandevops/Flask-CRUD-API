@@ -1,4 +1,4 @@
-name: Build and Push python flask API Docker Image
+name: Build and Push Python Flask API Docker Image
 
 permissions:
   security-events: write
@@ -38,10 +38,10 @@ jobs:
           tags: |
             type=semver,pattern={{version}}
 
-      - name: Build and push flask API Docker image
+      - name: Build and push Flask API Docker image
         uses: docker/build-push-action@v6
         with:
-          context: ./backend 
+          context: ./backend
           file: ./backend/flask.dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
@@ -59,6 +59,8 @@ jobs:
           severity: "HIGH,CRITICAL"
           format: "sarif"
           output: "trivy-results.sarif"
+        env:
+          TRIVY_CACHE_DIR: /tmp/trivy-cache # Use a temporary directory to avoid caching in .cache
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
@@ -95,5 +97,5 @@ jobs:
           token: ${{ secrets.PAT_TOKEN }}
           branch: update-deployment-image-${{ github.sha }}
           base: main
-          title: "Update flask API image tag to ${{ steps.meta.outputs.tags }}"
-          body: "This PR updates the flask API image tag to ${{ steps.meta.outputs.tags }}."
+          title: "Update Flask API image tag to ${{ steps.meta.outputs.tags }}"
+          body: "This PR updates the Flask API image tag to ${{ steps.meta.outputs.tags }}."
