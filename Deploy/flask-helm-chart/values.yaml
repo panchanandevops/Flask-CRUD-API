@@ -13,7 +13,7 @@ deployment:
   container:
     name: python-flask-app
     port: 4000
-    image: panchanandevops/python-flask-app:2.0.1
+    image: panchanandevops/python-flask-app:2.0.8
     resources:
       limits:
         memory: "512Mi"
