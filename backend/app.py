@@ -47,7 +47,7 @@ def create_user():
 def get_users():
   try:
     users = User.query.all()
-    users_data = [{'id': user.id, 'name': user.name, 'email': user.email} for user in users]
+    users_data = [user.json() for user in users]
     return jsonify(users_data), 200
   except Exception as e:
     return make_response(jsonify({'message': 'error getting users', 'error': str(e)}), 500)
