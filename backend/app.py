@@ -33,11 +33,11 @@ def create_user():
     db.session.add(new_user)
     db.session.commit()  
 
-    return jsonify({
-        'id': new_user.id,
-        'name': new_user.name,
-        'email': new_user.email
-    }), 201  
+    return make_response(jsonify({
+            'id': new_user.id,
+            'name': new_user.name,
+            'email': new_user.email
+    }), 201)  
 
   except Exception as e:
     return make_response(jsonify({'message': 'error creating user', 'error': str(e)}), 500)
@@ -48,7 +48,7 @@ def get_users():
   try:
     users = User.query.all()
     users_data = [user.json() for user in users]
-    return jsonify(users_data), 200
+    return make_response(jsonify(users_data), 200)
   except Exception as e:
     return make_response(jsonify({'message': 'error getting users', 'error': str(e)}), 500)
   
